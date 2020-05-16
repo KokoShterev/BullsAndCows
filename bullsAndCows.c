@@ -3,44 +3,18 @@
 #include <time.h>
 #include <string.h>
 
-void splitNumbers(int numbers[], int n)
+void findBullsAndCows(int n1, int n2, int *bulls, int *cows)
 {
-	for (int i = 3; i >= 0; i--)
-	{
-		numbers[i] = n % 10;
-		n /= 10;
-	}
-}
-
-int findBulls(int n1, int n2)
-{
-	int bulls = 0, n1arr[4] = {0}, n2arr[4] = {0};
-	splitNumbers(n1arr, n1);
-	splitNumbers(n2arr, n2);
+	char n1str[5] = {0}, n2str[5] = {0};
+	sprintf(n1str, "%i", n1);
+	sprintf(n2str, "%i", n2);
 	for (int i = 0; i < 4; i++)
 	{
-		if (n1arr[i] == n2arr[i])
-			bulls++;
+		if (n1str[i] == n2str[i])
+			(*bulls)++;
+		else if (strchr(n1str, n2str[i]))
+			(*cows)++;
 	}
-	return bulls;
-}
-
-int findCows(int n1, int n2)
-{
-	int cows = 0, n1arr[4] = {0}, n2arr[4] = {0};
-	splitNumbers(n1arr, n1);
-	splitNumbers(n2arr, n2);
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			if (i == j)
-				continue;
-			if (n1arr[i] == n2arr[j])
-				cows++;
-		}
-	}
-	return cows;
 }
 
 int main()
@@ -48,19 +22,18 @@ int main()
 	int possibleNumbers[9 * 9 * 8 * 7] = {0}, c = 0, turns = 0;
 	for (int i = 1023; i < 9877; i++)
 	{
-		int currentNumber[4] = {0};
-		splitNumbers(currentNumber, i);
-		if (currentNumber[0] != currentNumber[1] && currentNumber[0] != currentNumber[2] &&
-			currentNumber[0] != currentNumber[3] && currentNumber[1] != currentNumber[2] &&
-			currentNumber[1] != currentNumber[3] && currentNumber[2] != currentNumber[3])
+		char itos[5];
+		sprintf(itos, "%i", i);
+		if (itos[0] != itos[1] && itos[0] != itos[2] &&
+			itos[0] != itos[3] && itos[1] != itos[2] &&
+			itos[1] != itos[3] && itos[2] != itos[3])
 		{
 			possibleNumbers[c] = i;
 			c++;
 		}
 	}
-
 	srand((unsigned) time(0));
-	while (1)
+	while (c > 1)
 	{
 		turns++;
 		int supposed = possibleNumbers[rand() % c];
@@ -77,9 +50,9 @@ int main()
 		int newPossibleNumbers[c], c1 = 0;
 		for (int i = 0; i < c; i++)
 		{
-			int currentBuls = findBulls(possibleNumbers[i], supposed);
-			int currentCows = findCows(possibleNumbers[i], supposed);
-			if (currentBuls == bulls && currentCows == cows)
+			int currentBulls = 0, currentCows = 0;
+			findBullsAndCows(possibleNumbers[i], supposed, &currentBulls, &currentCows);
+			if (currentBulls == bulls && currentCows == cows)
 			{
 				newPossibleNumbers[c1] = possibleNumbers[i];
 				c1++;
@@ -99,15 +72,9 @@ int main()
 			printf("\n");
 		}
 		if (c == 1)
-		{
 			printf("I won in %i turns! Your number is %i\n", turns + 1, possibleNumbers[0]);
-			break;
-		}
-		if (c == 0)
-		{
+		else if (c == 0)
 			printf("You lied!");
-			break;
-		}
 	}
 	return 0;
 }
