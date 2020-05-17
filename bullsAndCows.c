@@ -53,10 +53,7 @@ int main()
 			int currentBulls = 0, currentCows = 0;
 			findBullsAndCows(possibleNumbers[i], supposed, &currentBulls, &currentCows);
 			if (currentBulls == bulls && currentCows == cows)
-			{
-				newPossibleNumbers[c1] = possibleNumbers[i];
-				c1++;
-			}
+				newPossibleNumbers[c1++] = possibleNumbers[i];
 		}
 		memset(possibleNumbers, 0, c * sizeof(int));
 		for (int i = 0; i < c1; i++)
