@@ -1,15 +1,31 @@
-# Bulls and Cows
+# *Бикове и крави*
 
-**Bulls and Cows** (also known as **Cows and Bulls**) is an old code-breaking mind or paper and pencil game for two or more players. The numerical version of the game is usually played with 4 digits, but can also be played with 3 or any other number of digits.
-On a sheet of paper, the players each write a 4-digit secret number. The digits must be all different and can't start with zero. Then, in turn, the players try to guess their opponent's number who gives the number of matches. If the matching digits are in their right positions, they are "bulls", if in different positions, they are "cows".
+*Кратко описание на проекта - програмата представлява реализация на известната игра "Бикове и крави", като потребителят си намисля число, а компютъра се опитва да го познае.*
 
-Example:
-- Secret number: 4271
-- Opponent's try: 1234
-- Answer: 1 bull and 2 cows. (The bull is "2", the cows are "4" and "1".)
+## Правила на играта от wikipedia
+Бикове и крави е логическа игра за отгатване на цифри. Играе се от двама противника, като всеки се стреми да отгатне тайното число, намислено от другия. След всеки ход, противникът дава броя на съвпаденията.
 
-The first one to reveal the other's secret number in the least number of guesses wins the game.
+Играта протича по следния начин. На лист хартия всеки участник написва своето тайно число. Тайните числа са четирицифрени, като цифрите не трябва да се повтарят, както и не може да започват с нула. След това, последователно един след друг, играчите задават въпрос с предположение за числото на противника. Противникът отговаря, като посочва броя на съвпаденията – ако дадена цифра от предположението се съдържа в тайното число и се намира на точното място, тя е „бик“, ако пък е на различно място, е „крава“.
 
-# About the program
+Пример:
 
-In this program, the computer will try to guess your secret number. When the computer asks you for a number your answer should be in format two-digit number - the first digit should be the bulls and the second - the cows. For example, if there are 1 bull and 2 cows the answer should be 12. If the computer guesses the number you should type 40.
+Тайно число: 4271
+Предположение: 1234
+Отговор: „1 бик и 2 крави“. (Бикът е „2“, а кравите са „4“ и „1“.)
+
+## Правила на играта специфични за програмата
+Като отговор компютърът очаква двуцифрено число, в което десетиците представляват броя на биковете, а единиците - броя на кравите. Напримен ако вашият отговор е „1 бик и 2 крави“ следва да отговорите с 12. Ако няма уцелена нито една цифра, отговорът трябва да е 00, а при познато цялото число, отговорът следва да е 40.
+
+## Как да си сваля и използвам проекта?
+
+### Инструкции за сваляне, инсталация и стартиране на програмата
+*Програмата е написана на езикът С, като са използвани само стандартни библиотеки. Предвид факта, че програмата е съставена само от един файл clone-нирането на репозиторито не е задължително. Достатъчно е само копирането на кода в raw-format*
+
+1) Сорс-кодът може да боде изкопиран и изпълнен в произволен online C compiler, който може да работи в интерактивен режим, като например https://www.onlinegdb.com/online_c_compiler#
+2) В случай, че желанието на потребителя е да изпълни програмата на собствения си компютър, е необходимо да има инсталиран C compiler - като напремир за Windows това е minGW, а за Linux това е GCC. След като програмата бъде преведена в машинен код от компилатора ще бъде саздаден изпълним файл, който трябва да стартирате.
+3) Компилиран вариант на програмата за Windows 10 и Linux ще бъде качена непосредствено преди TUES FEST 2020.
+
+
+## Информация за авторите на проекта
+
+* **Константин Щерев**
