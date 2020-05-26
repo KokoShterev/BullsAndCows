@@ -33,11 +33,23 @@ int main()
 		}
 	}
 	srand((unsigned) time(0));
+	int computerNumber = possibleNumbers[rand() % c], mySuggestion;
+//	printf ("computerNumber = %i\n", computerNumber);
 	while (c > 1)
 	{
 		turns++;
+		int currentBulls = 0, currentCows = 0;
+		printf("Make your suggestion\n");
+		scanf("%i", &mySuggestion);
+		findBullsAndCows(computerNumber, mySuggestion, &currentBulls, &currentCows);
+		if (currentBulls == 4){
+			printf("You won in %i turns! My number is %i\n", turns, computerNumber);
+			break;
+		}
+		else
+			printf("You have %i bulls and %i cows\n", currentBulls, currentCows);
 		int supposed = possibleNumbers[rand() % c];
-		printf("%i\nBulls & Cows in format bc\n", supposed);
+		printf("Computer's suggestion is %i\nBulls & Cows in format bc\n", supposed);
 		int bcAnswer;
 		scanf("%i", &bcAnswer);
 		int bulls = bcAnswer / 10;
@@ -50,7 +62,8 @@ int main()
 		int newPossibleNumbers[c], c1 = 0;
 		for (int i = 0; i < c; i++)
 		{
-			int currentBulls = 0, currentCows = 0;
+			currentBulls = 0;
+			currentCows = 0;
 			findBullsAndCows(possibleNumbers[i], supposed, &currentBulls, &currentCows);
 			if (currentBulls == bulls && currentCows == cows)
 				newPossibleNumbers[c1++] = possibleNumbers[i];
