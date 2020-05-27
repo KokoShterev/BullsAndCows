@@ -33,30 +33,43 @@ int main()
 		}
 	}
 	srand((unsigned) time(0));
-	int computerNumber = possibleNumbers[rand() % c], mySuggestion;
+	int computerNumber = possibleNumbers[rand() % c], myGuess;
 //	printf ("computerNumber = %i\n", computerNumber);
-	while (c > 1)
+	while (1)
 	{
 		turns++;
 		int currentBulls = 0, currentCows = 0;
-		printf("Make your suggestion\n");
-		scanf("%i", &mySuggestion);
-		findBullsAndCows(computerNumber, mySuggestion, &currentBulls, &currentCows);
-		if (currentBulls == 4){
+		printf("Make your guess\n");
+		scanf("%i", &myGuess);
+		findBullsAndCows(computerNumber, myGuess, &currentBulls, &currentCows);
+		if (currentBulls == 4)
+		{
 			printf("You won in %i turns! My number is %i\n", turns, computerNumber);
 			break;
 		}
 		else
+		{
 			printf("You have %i bulls and %i cows\n", currentBulls, currentCows);
+		}
+		if (c == 1)
+		{
+			printf("I won in %i turns! Your number is %i\n", turns, possibleNumbers[0]);
+			break;
+		}
+		else if (c == 0)
+		{
+			printf("You lied!");
+			break;
+		}
 		int supposed = possibleNumbers[rand() % c];
-		printf("Computer's suggestion is %i\nBulls & Cows in format bc\n", supposed);
+		printf("Computer's guess is %i\nBulls & Cows in format bc\n", supposed);
 		int bcAnswer;
 		scanf("%i", &bcAnswer);
 		int bulls = bcAnswer / 10;
 		int cows = bcAnswer % 10;
 		if (bulls == 4)
 		{
-			printf("I won in %i turns!", turns);
+			printf("I won in %i turns!\n", turns);
 			break;
 		}
 		int newPossibleNumbers[c], c1 = 0;
@@ -81,10 +94,6 @@ int main()
 				printf("%i ", possibleNumbers[i]);
 			printf("\n");
 		}
-		if (c == 1)
-			printf("I won in %i turns! Your number is %i\n", turns + 1, possibleNumbers[0]);
-		else if (c == 0)
-			printf("You lied!");
 	}
 	return 0;
 }
